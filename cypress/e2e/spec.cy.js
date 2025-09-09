@@ -98,18 +98,13 @@ describe('Fluxo de Compras', () => {
     cy.get('@produtoCard').find('.card-title')
       .invoke('text')
       .then((nomeProduto) => {
-
         // Adiciona o produto na lista de compras
         cy.get('@produtoCard').find('[data-testid="adicionarNaLista"]').click()
-
         // Vai para a lista de compras
         cy.get('h1').contains('Lista de Compras')
-
-        // Valida que o produto está na lista
         cy.get('[data-testid="shopping-cart-product-name"]')
           .should('contain.text', nomeProduto.trim())
 
-        // Remove o produto
        cy.get('[data-testid="limparLista"]').click()
        cy.get('[data-testid="shopping-cart-empty-message"]').contains('Seu carrinho está vazio')
       })
